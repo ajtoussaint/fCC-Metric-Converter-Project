@@ -2,53 +2,115 @@ function ConvertHandler() {
 
   this.getNum = function(input) {
     //takes query string as an input and returns the number as float
-    console.log("using getNum");
-    let result;
-
-    return result;
+    console.log("Num: " + input.slice(0,input.search(/[a-z,A-Z]/)))
+    let result = input.slice(0,input.search(/[a-z,A-Z]/));
+    if(result.length==0){result="1"};
+    //check for invalid input
+    let resArr = result.match(/\D/g);
+    if(resArr.length > 1 || resArr[0] !== "/"){result = "Invalid Number"}
+    return result
   };
 
   this.getUnit = function(input) {
     //Takes Query string as input and returns the unit as string
-    console.log("using getUnit");
-    let result;
-
+    let result = input.slice(input.search(/[a-z,A-Z]/),input.length);
+    if(result!="L"){result = result.toLowerCase}
+    //check for invalid input
+    switch (result) {
+      case "lbs":
+      case "kg":
+      case "gal":
+      case "L":
+      case "mi":
+      case "km":
+      break;
+      default: result = "Invalid Unit"
+      break;
+    }
     return result;
   };
 
   this.getReturnUnit = function(initUnit) {
     //takes the return of "getUnit" and returns the converted unit as string
     //Ex if getUnit(...)=gal then this will return "L"
-    console.log("using getReturnUnit");
     let result;
-
+    switch (initUnit) {
+      case "lbs": result = "kg";
+      break;
+      case "kg": result = "lb";
+      break;
+      case "gal": result = "L";
+      break;
+      case "L": result = "gal";
+      break;
+      case "mi": result = "km";
+      break;
+      case "km": result = "mi";
+      break;
+      default: result = "Invalid Unit"
+      break;
+    }
     return result;
   };
 
   this.spellOutUnit = function(unit) {
     //takes abbreiviation as input and reutrns full name as str
-    console.log("using spellOutUnit");
     let result;
-
+    switch (unit) {
+      case "lbs": result = "pounds";
+      break;
+      case "kg": result = "kilograms";
+      break;
+      case "gal": result = "gallons";
+      break;
+      case "L": result = "liters";
+      break;
+      case "mi": result = "miles";
+      break;
+      case "km": result = "kilometers";
+      break;
+      default: result = "Invalid Unit"
+      break;
+    }
     return result;
   };
 
   this.convert = function(initNum, initUnit) {
     //takes initial number and unit from query string
-    console.log("using convert");
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
     let result;
-
+    //handle the initNum if fraction
+    if(initNum.indexOf("/") >= 0){
+      console.log("Using fraction logic");
+      let fractionArr = initNum.split("/")
+      initNum = fractionArr[0]/fractionArr[1];
+    }
+    console.log(initNum);
+    switch (initUnit) {
+      case "lbs": result = initNum * lbsToKg;
+      break;
+      case "kg": result = initNum / lbsToKg;
+      break;
+      case "gal": result = initNum * galToL;
+      break;
+      case "L": result = initNum / galToL;
+      break;
+      case "mi": result = initNum * miToKm;
+      break;
+      case "km": result = initNum / miToKm;
+      break;
+      default: result = "Invalid Unit"
+      break;
+    }
+    console.log(result);
     return result;
   };
 
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
     //takes all of the information and returns a string that describes the conversion
-    console.log("using get String");
-    let result;
-
+    let result = initNum + " " + this.spellOutUnit(initUnit) + " converts to " + returnNum + " " +this.spellOutUnit(returnUnit);
     return result;
   };
 

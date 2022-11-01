@@ -11,8 +11,20 @@ module.exports = function (app) {
   app.route("/api/convert").get( (req,res) => {
     //end goal: take the query and return a JSON object with all the info in the example
     //Ex: { initNum: 3.1, initUnit: 'mi', returnNum: 4.98895, returnUnit: 'km', string: '3.1 miles converts to 4.98895 kilometers' }
-    console.log("test route");
-    res.send("Hello API")
+    let query = req.query.input;
+    console.log("convert route, query=" + query);
+    let queryNum = convertHandler.getNum(query);
+    let queryUnit = convertHandler.getUnit(query);
+    let unitName = convertHandler.spellOutUnit(queryUnit);
+    let returnUnit = convertHandler.getReturnUnit(queryUnit);
+    let convertedValue = convertHandler.convert(queryNum, queryUnit);
+    let returnString = convertHandler.getString(queryNum, queryUnit, convertedValue, returnUnit);
+    res.send({
+      initNum: queryNum,
+      initUnit: queryUnit,
+      returnNum: convertedValue,
+      returnUnit: returnUnit,
+      string: returnString});
   })
 
 };
