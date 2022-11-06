@@ -6,7 +6,7 @@ function ConvertHandler() {
     if(result.length == 0){ result= "1"};
     //check for invalid input
     if(!(/^\d+(\.\d+)?(\/\d+(\.\d+)?)?$/.test(result))){
-      return "Invalid Number";
+      return "invalid number";
     }
     return result;
   };
@@ -24,7 +24,7 @@ function ConvertHandler() {
       case "mi":
       case "km":
       break;
-      default: result = "Invalid Unit";
+      default: result = "invalid unit";
       break;
     }
     console.log("get unit result",result);
@@ -38,7 +38,7 @@ function ConvertHandler() {
     switch (initUnit) {
       case "lbs": result = "kg";
       break;
-      case "kg": result = "lb";
+      case "kg": result = "lbs";
       break;
       case "gal": result = "L";
       break;
@@ -48,7 +48,7 @@ function ConvertHandler() {
       break;
       case "km": result = "mi";
       break;
-      default: result = "Invalid Unit"
+      default: result = "invalid unit"
       break;
     }
     return result;
@@ -70,7 +70,7 @@ function ConvertHandler() {
       break;
       case "km": result = "kilometers";
       break;
-      default: result = "Invalid Unit"
+      default: result = "invalid unit"
       break;
     }
     return result;
@@ -101,7 +101,7 @@ function ConvertHandler() {
       break;
       case "km": result = initNum / miToKm;
       break;
-      default: result = "Invalid Unit"
+      default: result = "invalid unit"
       break;
     }
     return result;

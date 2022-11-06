@@ -17,7 +17,7 @@ module.exports = function (app) {
     let queryUnit = convertHandler.getUnit(query);
     //format return in case of invalid input
     console.log("Number: " + queryNum + " Unit: " + queryUnit);
-    if(queryNum =="Invalid Number" && queryUnit ==  "Invalid Unit"){
+    if(queryNum =="invalid number" && queryUnit ==  "invalid unit"){
       res.send("invalid number and unit");
     } else if (queryNum =="Invalid Number"){
       res.send("invalid number");
