@@ -104,6 +104,7 @@ function ConvertHandler() {
       default: result = "invalid unit"
       break;
     }
+    result = Math.round(result*100000)/100000
     return result;
   };
 

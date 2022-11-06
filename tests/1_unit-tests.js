@@ -90,7 +90,7 @@ suite('Unit Tests', function(){
 
   //convertHandler should correctly convert lbs to kg.
   test("convert lbs to kg", function() {
-    assert.equal(0.453592, convertHandler.convert("1","lbs"),"failed to convert pounds correctly");
+    assert.equal(0.45359, convertHandler.convert("1","lbs"),"failed to convert pounds correctly");
   });
 
   //convertHandler should correctly convert kg to lbs.

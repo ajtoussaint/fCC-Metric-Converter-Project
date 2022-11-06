@@ -19,9 +19,9 @@ module.exports = function (app) {
     console.log("Number: " + queryNum + " Unit: " + queryUnit);
     if(queryNum =="invalid number" && queryUnit ==  "invalid unit"){
       res.send("invalid number and unit");
-    } else if (queryNum =="Invalid Number"){
+    } else if (queryNum =="invalid number"){
       res.send("invalid number");
-    } else if (queryUnit ==  "Invalid Unit"){
+    } else if (queryUnit ==  "invalid unit"){
       res.send("invalid unit");
     }else{
       let unitName = convertHandler.spellOutUnit(queryUnit);
