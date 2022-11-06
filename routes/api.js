@@ -18,16 +18,20 @@ module.exports = function (app) {
     //format return in case of invalid input
     console.log("Number: " + queryNum + " Unit: " + queryUnit);
     if(queryNum =="invalid number" && queryUnit ==  "invalid unit"){
+      console.log("invalid number and unit" + "\n");
       res.send("invalid number and unit");
     } else if (queryNum =="invalid number"){
+      console.log("invalid number" + "\n");
       res.send("invalid number");
     } else if (queryUnit ==  "invalid unit"){
+      console.log("invalid unit" + "\n");
       res.send("invalid unit");
     }else{
       let unitName = convertHandler.spellOutUnit(queryUnit);
       let returnUnit = convertHandler.getReturnUnit(queryUnit);
       let convertedValue = convertHandler.convert(queryNum, queryUnit);
       let returnString = convertHandler.getString(queryNum, queryUnit, convertedValue, returnUnit);
+      console.log(returnString + "\n");
       res.send({
         initNum: queryNum,
         initUnit: queryUnit,

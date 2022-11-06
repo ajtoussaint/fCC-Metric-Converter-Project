@@ -3,10 +3,18 @@ function ConvertHandler() {
   this.getNum = function(input) {
     //takes query string as an input and returns the number as float
     let result = input.slice(0,input.search(/[a-z,A-Z]/));
-    if(result.length == 0){ result= "1"};
+    if(result.length == 0){ result= 1};
     //check for invalid input
     if(!(/^\d+(\.\d+)?(\/\d+(\.\d+)?)?$/.test(result))){
       return "invalid number";
+    }
+    //handle the number if fraction
+    if(result.indexOf("/") >= 0){
+      let fractionArr = result.split("/")
+      result = fractionArr[0]/fractionArr[1];
+      console.log(typeof(result));
+    }else{
+      result = result * 1 //convert to float
     }
     return result;
   };
@@ -14,6 +22,7 @@ function ConvertHandler() {
   this.getUnit = function(input) {
     //Takes Query string as input and returns the unit as string
     let result = input.slice(input.search(/[a-z,A-Z]/),input.length);
+    if(result=="l"){result = result.toUpperCase()}
     if(result!="L"){result = result.toLowerCase()}
     //check for invalid input
     switch (result) {
@@ -27,7 +36,6 @@ function ConvertHandler() {
       default: result = "invalid unit";
       break;
     }
-    console.log("get unit result",result);
     return result;
   };
 
@@ -82,12 +90,6 @@ function ConvertHandler() {
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
     let result;
-    //handle the initNum if fraction
-    if(initNum.indexOf("/") >= 0){
-      console.log("Using fraction logic");
-      let fractionArr = initNum.split("/")
-      initNum = fractionArr[0]/fractionArr[1];
-    }
     switch (initUnit) {
       case "lbs": result = initNum * lbsToKg;
       break;

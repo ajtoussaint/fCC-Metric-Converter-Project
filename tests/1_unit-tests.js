@@ -17,11 +17,11 @@ suite('Unit Tests', function(){
   });
   //convertHandler should correctly read a fractional input.
   test("read a fractional input", function (){
-    assert.equal("12/2",convertHandler.getNum("12/2lbs"),"factional input read incorrectly");
+    assert.equal("6",convertHandler.getNum("12/2lbs"),"factional input read incorrectly");
   });
   //convertHandler should correctly read a fractional input with a decimal.
   test("read a decimal number and fraction input", function (){
-    assert.equal("12.3/2",convertHandler.getNum("12.3/2lbs"),"decimal and fractional combined input read incorrectly");
+    assert.equal("6.15",convertHandler.getNum("12.3/2lbs"),"decimal and fractional combined input read incorrectly");
   });
 
   //convertHandler should correctly return an error on a double-fraction (i.e. 3/2/3).
