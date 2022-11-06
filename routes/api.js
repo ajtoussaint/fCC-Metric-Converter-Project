@@ -15,17 +15,25 @@ module.exports = function (app) {
     console.log("convert route, query=" + query);
     let queryNum = convertHandler.getNum(query);
     let queryUnit = convertHandler.getUnit(query);
-    let unitName = convertHandler.spellOutUnit(queryUnit);
-    let returnUnit = convertHandler.getReturnUnit(queryUnit);
-    let convertedValue = convertHandler.convert(queryNum, queryUnit);
-    let returnString = convertHandler.getString(queryNum, queryUnit, convertedValue, returnUnit);
-    res.send({
-      initNum: queryNum,
-      initUnit: queryUnit,
-      returnNum: convertedValue,
-      returnUnit: returnUnit,
-      string: returnString});
-      //Testing repo clone with this comment... .ignore
+    //format return in case of invalid input
+    console.log("Number: " + queryNum + " Unit: " + queryUnit);
+    if(queryNum =="Invalid Number" && queryUnit ==  "Invalid Unit"){
+      res.send("invalid number and unit");
+    } else if (queryNum =="Invalid Number"){
+      res.send("invalid number");
+    } else if (queryUnit ==  "Invalid Unit"){
+      res.send("invalid unit");
+    }else{
+      let unitName = convertHandler.spellOutUnit(queryUnit);
+      let returnUnit = convertHandler.getReturnUnit(queryUnit);
+      let convertedValue = convertHandler.convert(queryNum, queryUnit);
+      let returnString = convertHandler.getString(queryNum, queryUnit, convertedValue, returnUnit);
+      res.send({
+        initNum: queryNum,
+        initUnit: queryUnit,
+        returnNum: convertedValue,
+        returnUnit: returnUnit,
+        string: returnString});
+    };
   })
-
 };

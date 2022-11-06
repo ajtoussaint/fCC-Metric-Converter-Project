@@ -2,19 +2,19 @@ function ConvertHandler() {
 
   this.getNum = function(input) {
     //takes query string as an input and returns the number as float
-    console.log("Num: " + input.slice(0,input.search(/[a-z,A-Z]/)))
     let result = input.slice(0,input.search(/[a-z,A-Z]/));
-    if(result.length==0){result="1"};
+    if(result.length == 0){ result= "1"};
     //check for invalid input
-    let resArr = result.match(/\D/g);
-    if(resArr.length > 1 || resArr[0] !== "/"){result = "Invalid Number"}
-    return result
+    if(!(/^\d+(\.\d+)?(\/\d+(\.\d+)?)?$/.test(result))){
+      return "Invalid Number";
+    }
+    return result;
   };
 
   this.getUnit = function(input) {
     //Takes Query string as input and returns the unit as string
     let result = input.slice(input.search(/[a-z,A-Z]/),input.length);
-    if(result!="L"){result = result.toLowerCase}
+    if(result!="L"){result = result.toLowerCase()}
     //check for invalid input
     switch (result) {
       case "lbs":
@@ -24,9 +24,10 @@ function ConvertHandler() {
       case "mi":
       case "km":
       break;
-      default: result = "Invalid Unit"
+      default: result = "Invalid Unit";
       break;
     }
+    console.log("get unit result",result);
     return result;
   };
 
@@ -87,7 +88,6 @@ function ConvertHandler() {
       let fractionArr = initNum.split("/")
       initNum = fractionArr[0]/fractionArr[1];
     }
-    console.log(initNum);
     switch (initUnit) {
       case "lbs": result = initNum * lbsToKg;
       break;
@@ -104,7 +104,6 @@ function ConvertHandler() {
       default: result = "Invalid Unit"
       break;
     }
-    console.log(result);
     return result;
   };
 
