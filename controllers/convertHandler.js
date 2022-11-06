@@ -3,7 +3,7 @@ function ConvertHandler() {
   this.getNum = function(input) {
     //takes query string as an input and returns the number as float
     let result = input.slice(0,input.search(/[a-z,A-Z]/));
-    if(result.length == 0){ result= 1};
+    if(result.length == 0){ return 1};
     //check for invalid input
     if(!(/^\d+(\.\d+)?(\/\d+(\.\d+)?)?$/.test(result))){
       return "invalid number";
@@ -12,7 +12,6 @@ function ConvertHandler() {
     if(result.indexOf("/") >= 0){
       let fractionArr = result.split("/")
       result = fractionArr[0]/fractionArr[1];
-      console.log(typeof(result));
     }else{
       result = result * 1 //convert to float
     }
